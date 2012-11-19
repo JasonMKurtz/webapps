@@ -30,7 +30,7 @@
 		var pos = src.indexOf('?');
 		if (pos >= 0) {
 			src = src.substr(0, pos);
-		}
+		}		
 		
 		var date = new Date();
 		if (len == -1) { 
@@ -45,7 +45,8 @@
 		return false;
 	}
 
-	function new_length(direction) { 
+	function new_length(event) {
+		var direction = event.data.direction;  
 		$.ajax({
 			url: "captcha_len.php", 
 			data: { dir: direction }, 
@@ -83,6 +84,6 @@
                 $("#input").blur(verify_captcha_text);
 
 		$("#captcha").click(function() { reloadImg("captcha_image", -1); }); 
-		$("#minus_img").click(function() { new_length(0); });
-		$("#plus_img").click(function() { new_length(1); }); 
+		$("#minus_img").bind('click', { direction: 0 }, new_length); 
+		$("#plus_img").bind('click', { direction: 1 }, new_length); 
         });
