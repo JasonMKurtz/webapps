@@ -66,18 +66,12 @@
 	// global variables for the images to preload
 	var i_check; 
 	var i_x; 
-	var i_plus; 
-	var i_minus; 
         $(document).ready(function() {
 		i_check = new Image(); 
 		i_x     = new Image(); 
-		i_plus  = new Image(); 
-		i_minus = new Image(); 
 
 		i_check.src = "images/check.jpg"; 
 		i_x.src     = "images/x.jpg"; 
-		i_plus.src  = "images/plus.png"; 
-		i_minus.src = "images/minus.png"; 
 
 		$("#result_image").hide(); 
                 $("#input").keyup(verify_captcha_text);
