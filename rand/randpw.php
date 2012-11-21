@@ -42,4 +42,5 @@
 	else
 		$len = $_GET['len']; 
 	printf("Random string(%d): %s\n", $len, GenRand($len)); 
+	printf("<br>You can also browse to http://www.jkode.us/rand/5 to see a randomly generated string of five characters."); 
 ?>
