@@ -1,2 +1,3 @@
+DirectoryIndex randpw.php
 RewriteEngine on
 RewriteRule ^([\d]+)$ randpw.php?len=$1
