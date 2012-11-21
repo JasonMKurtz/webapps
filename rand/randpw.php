@@ -1,4 +1,6 @@
 <?php
+	/* GenRand() was copied, under the GPL, from a user-generated comment on php.net. I don't take credit for writing it. */ 
+
         function GenRand($len = 10) {
                 if (@is_readable('/dev/urandom')) {
                         $f=fopen('/dev/urandom', 'r');
