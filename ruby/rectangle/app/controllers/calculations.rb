@@ -1,7 +1,13 @@
-class CalculationsController < ActionController::Base
-	def calculate
-		height = params[:height].to_i
-		width = params[:width].to_i
+class Calculations < ActiveRecord::Base
+	def index
+	end
+
+	def handle
+		# height = params[:height]
+		height = 10
+		
+		# -width = params[:width]
+		width = 10
 
 		result = {
 			area: height * width,

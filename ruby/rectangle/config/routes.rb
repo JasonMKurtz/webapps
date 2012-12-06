@@ -1,6 +1,6 @@
 Rectangle::Application.routes.draw do
+  match 'rectangle' => "Calculations#calculate"
   root :to => 'home#index'
-  match 'rectangle/' => 'calculations#handle'
 
   # get "rectangle/"
 

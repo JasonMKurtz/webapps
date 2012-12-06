@@ -17,11 +17,11 @@
 $(document).ready(function() { 
         $("#submit").click(function() { 
 		$.ajax({
-			url: "/rectangle", 
+			url: "/rectangle/rectangle", 
 			data: { width: $("#width").val(), height: $("#height").val() }, 
 			type: "post"
 		}).success(function(data) { 
-			$("#result").html(data['area']); 
+			$("#result").html("The area of this rectangle is " + data['area'] + " units and the length of a diagonal line through the center is " + data['diag'] + " units.");
 		}); 
 	}); 
 }); 
