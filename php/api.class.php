@@ -52,7 +52,6 @@
 		function Get() { 
 			if (!isset($this->reply) || $this->reply == "")
 				return "REPLY-1"; 
-			//die(var_dump($this->reply)); 
 			$decode = json_decode($this->reply);
 			if ($decode != NULL) 
 				return $decode;
