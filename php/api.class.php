@@ -17,16 +17,21 @@
 			return $this;
 		}
 
-		// takes in the data as a string, returns an associative array, separated by &
-		private function FormatData($data) { 
-			$da = explode("&", $data);
-			if (count($da) <= 1)
-				return $da; 
+		// takes in the data as a string (key=val&key2=val2), returns an associative array
+		// FormatData($key, $value) or FormatData(array('key' => 'value', 'foo' => 'bar'))
+		private function FormatData() {
+			$args = func_get_args(); 
+
+			if (is_array($args[0])) 
+				return $args[0]; 
+	
+			
+ 
 			foreach ($da as $data) {
 				$data = explode("=", $data);
-				$da[$data[0]] = $data[1];
+				$ret[$data[0]] = $data[1];
 			}
-			return $da; 
+			return $ret; 
 		}
 
 
@@ -57,13 +62,16 @@
 			return $this->curlopts; 
 		}			 
 
-		function Send($data = "") { 
-			if ($this->data == "") {
-				if ($data != "") 
-					$this->data = $this->FormatData($data); 
-				else
-					return "DATA-1"; 
-			}
+		function Send() {
+			$args = func_get_args(); 
+			if (!is_array($args[0]) && !isset($args[1])) 
+				return; 
+
+			if (!is_array($args[0])) 
+				$this->data = array($args[0] => $args[1]); 
+			else 
+				$this->data = $args[0]; 
+			
 			$this->SetOpt(CURLOPT_URL, $this->url); 
 			$this->SetOpt(CURLOPT_RETURNTRANSFER, true);
 			$this->SetOpt(CURLOPT_CUSTOMREQUEST, $this->type);
