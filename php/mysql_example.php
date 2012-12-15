@@ -1,7 +1,8 @@
 <?php
 	require_once("mysql.class.php");
+	require_once("config.inc.php"); 
 
-	$m = new MySQL("liber", "jason1", "localhost", "Liber"); 
+	$m = new MySQL($config['mysql_user'], $config['mysql_password'], $config['mysql_host'], $config['mysql_database']); 
 	$m->Query("SELECT * FROM test"); 
 
 	$i = 0; 
