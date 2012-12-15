@@ -132,15 +132,26 @@
 			}
 
 			// return data either as an array or as an object (0 = array, 1 = object)
-			// TODO: set up access as MySQL::Get(<row>)->field, MySQL::Get()->field, MySQL::Get() for all data. 
+			// TODO: set up access as MySQL::Get(), MySQL::Get(<row>)->field
+
 			function Get() { 
 				$args = func_get_args(); 
 				$row = -1; 
 				if (isset($args[0])) 
 					$row = $args[0]; 
-				
-				// $this->result[<row>]['field'] = value; 
-				
+
+				$ret = array(); 
+				// $this->result[<row>][<field>]
+				if ($row > -1) {
+					$ret = $this->result[$row]; 
+				} else {
+					foreach ($this->result as $row) { 
+						$ret[] = $row; 
+					}
+				}
+				return (object) $ret; 
+					
+			}				
 				
 			function GetData($type = 1) {
 				if (!is_array($this->result))
@@ -148,16 +159,6 @@
 
 				return ($type == 0 ? $this->result : (object) $this->result); 
 				//return (is_array($this->result) ? $this->result : NULL);  
-			}
-				
-			function Get($row = 1, $item = NULL) {
-				$row--; 
-				if (!is_array($this->result) || !isset($this->result[$row]))
-					return FALSE; 
-				if ($item == NULL)
-					return $this->result[$row]; 
-				else 
-					return $this->result[$row][$item]; 
 			}
 				
 			function GetAllRow($item) {
