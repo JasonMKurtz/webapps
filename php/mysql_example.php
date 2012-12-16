@@ -11,5 +11,5 @@
 		$i++; 
 	}
 
-	echo sprintf("Row 0: ID = %s, FIELD1 = %s\n", $m->Get(0)->id, $m->Get(1)->field1); 
+	echo sprintf("Row 0: ID = %s, FIELD1 = %s\n", $m->Get(0)->id, $m->Get(0)->field1); 
 ?>
