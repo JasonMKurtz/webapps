@@ -25,7 +25,7 @@
 			}
 
 			function __construct($user = "", $pass = "", $host = "", $db = "") {
-				//$this->Logger =& Logger::GetInstance(); // connection to our log handler
+				global $config; 
 				$this->username = ($user != "" ? $user : $config['MYSQL_USER']); 
 				$this->password = ($pass != "" ? $pass : $config['MYSQL_PASSWORD']); 
 				$this->hostname = ($host != "" ? $host : $config['MYSQL_HOST']); 
@@ -34,7 +34,7 @@
 				if (is_object($this->mysqli)) 
 					die("Trying to connect to an already connected socket...\n"); 
 			
-				$this->mysqli = new mysqli($host, $user, $pass); 
+				$this->mysqli = new mysqli($this->hostname, $this->username, $this->password); 
 				if ($this->mysqli->errno != 0) 
 					die("MYSQL connection error: " . $this->mysqli->connect_error); 
 
