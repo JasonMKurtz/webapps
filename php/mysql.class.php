@@ -24,11 +24,11 @@
 				return $me; 
 			}
 
-			function __construct($user, $pass, $host, $db = '') {
+			function __construct($user = "", $pass = "", $host = "", $db = "") {
 				//$this->Logger =& Logger::GetInstance(); // connection to our log handler
-				$this->username = $user; 
-				$this->password = $pass; 
-				$this->hostname = $host; 
+				$this->username = ($user != "" ? $user : $config['MYSQL_USER']); 
+				$this->password = ($pass != "" ? $pass : $config['MYSQL_PASSWORD']); 
+				$this->hostname = ($host != "" ? $host : $config['MYSQL_HOST']); 
 				$this->status = 1; 
 
 				if (is_object($this->mysqli)) 
@@ -40,8 +40,12 @@
 
 				if ($db != "") {
 					$this->mysqli->select_db($db); 
-					$this->database = $db; 
+					$this->db = $db; 
+				} else { 
+					$this->mysqli->select_db($config['MYSQL_DATABASE']); 
+					$this->db = $config['MYSQL_DATABASE']; 
 				}
+
 				
 				return $this; 
 			}
