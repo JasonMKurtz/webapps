@@ -1,5 +1,5 @@
 <?php
-	//require_once("config.inc.php"); 
+	require_once("config.inc.php"); 
 
 	Class MySQL {
 			private $username = '', $password = '', $hostname = '', $database = ''; 
@@ -20,7 +20,7 @@
 					return $me; 
 				
 				global $config; 
-				$me = new MySQL($config['MYSQL_USER'], $config['MYSQL_PASSWORD'], $config['MYSQL_HOST'], $config['MYSQL_DB']); 
+				$me = new MySQL($config['MYSQL_USER'], $config['MYSQL_PASSWORD'], $config['MYSQL_HOST'], $config['MYSQL_DATABASE']); 
 				return $me; 
 			}
 
@@ -125,6 +125,10 @@
 					case "query": 
 						return $this->query_count; 
 				}
+			}
+
+			function NumRows() { 
+				return $this->Count("rows"); 
 			}
 
 			function QueryCount() { 
