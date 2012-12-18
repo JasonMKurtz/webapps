@@ -2,10 +2,12 @@
 <html>
 <head>
 <?php
+	/*
 	require_once("mobile/Mobile_Detect.php"); 
 	$d = new Mobile_Detect(); 
 	if ($d->isMobile() || $d->isTablet()) 
 		header("Location: http://m.jkode.us/captcha"); 
+	*/ 
 ?>
 <title>JKurtz Captcha</title>
 <link rel="icon" type="image/jpg" href="images/icon.jpg">
