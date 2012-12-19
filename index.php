@@ -17,8 +17,7 @@
 </head>
 <body>
 <div id="container">
-<div id="header">JKODE Captcha</div>
-<div id="copy">Developed by <a href="#" title="jason@jkurtz.net">Jason Kurtz</a></div>
+<?php include('header.php'); ?>
 <div class="inst">
 	<span>Type what you see. Without the spaces.</span>
 	<br>
