@@ -2,7 +2,7 @@
 <html>
 <head>
 <?php
-	/* 
+	/*
 	require_once("mobile/Mobile_Detect.php"); 
 	$d = new Mobile_Detect(); 
 	if ($d->isMobile() || $d->isTablet()) 
