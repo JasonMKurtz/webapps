@@ -1,7 +1,7 @@
 * { margin:0 ; padding:0 }
 a, a:visited, a:active { text-decoration:none ; color:#0000ff }
 a:hover { text-decoration:underline }
-body, html { padding:0 ; margin:0 ; height:100% ; background-color:#000000 }
+body, html { padding:0 ; margin:0 ; height:100% }
 div { text-align:center }
 #input { text-align:center }
 img#result_image { padding:.3em ; border:0 }
