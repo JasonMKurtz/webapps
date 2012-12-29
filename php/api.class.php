@@ -79,17 +79,26 @@
         	        $this->SetOpt(CURLOPT_SSL_VERIFYHOST, FALSE);
 
 			$this->SetOpt(CURLOPT_POSTFIELDS,http_build_query($this->data));
+			//die(var_dump($this->GetOpts())); 
 			$this->reply = curl_exec($this->curl);
 			return $this->Get(); 
+		}
+
+		// json encoded array. 
+		function SendJSON($key, $json) { 
+			$data = json_decode($json); 
+			$this->Send($key, $data); 
 		}
 
 		function Get() { 
 			if (!isset($this->reply) || $this->reply == "")
 				return "REPLY-1"; 
+				//return var_dump($this->reply); 
 			$decode = json_decode($this->reply);
-			if ($decode != NULL) 
-				return $decode;
-			else {  
+			return $decode; 
+			//if ($decode != NULL) 
+			//	return $decode;
+			//else {  
 				if (is_object($decode)) 
 					return ($this->datatype == 1 ? $decode : (array) $decode); 
 
@@ -101,7 +110,12 @@
 					$da[$data[0]] = $data[1]; 
 				}
 				return ($this->datatype == 1 ? (object) $da : $da); 
-			} 
+			//} 
 		}
+		
+		function GetRaw() { 
+			return $this->reply; 
+		}
+
 	}		
 ?>
