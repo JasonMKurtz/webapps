@@ -12,33 +12,8 @@
 			$this->img['size'] = getimagesize($imgName);  
 		}
 
-		function RenameImage($old, $new) {
-			system("mv " . $old. " " . $new); 
-		}
-
-		function GetShortName() {
-			return $this->img['short_name']; 
-		}
-
-		function GetSize() {
-			return $this->img['size']; 
-		}
-		
-		function GetName() {
-			return $this->img['name']; 
-		}
-
-		function GetNameNoExt() {
-			$p = pathinfo($this->img['name']); 
-			return $p['filename']; 
-		}
-
-		function GetPath() {
-			return $this->img['filepath']; 
-		}
 
 		function ScaleImage($dest, $factor) {
-			// $ratio = ($this->img['size'][0] / $this->img['size'][1]) * ($factor / 100); 
 			$newWidth = $this->img['size'][0] * ($factor / 100); 
 			$newHeight = $this->img['size'][1] * ($factor / 100); 
 			
@@ -76,18 +51,6 @@
 			$result = imagejpeg($image_template, $dest, 100); 
 
 			imagedestroy($image_template); 
-		}
-
-		function MakeSmall($dest) {
-			$this->ResizeImage($dest, 200, 160); 
-		}
-
-		function MakeTN($dest) {
-			$this->ResizeImage($dest, 110, 90); 
-		}
-
-		function MakeReg($dest) {
-			$this->ResizeImage($dest, 380, 285); 
 		}
 	}
 ?>
