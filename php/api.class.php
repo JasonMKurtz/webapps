@@ -64,13 +64,18 @@
 
 		function Send() {
 			$args = func_get_args(); 
-			if (!is_array($args[0]) && !isset($args[1])) 
-				return; 
 
-			if (!is_array($args[0])) 
-				$this->data = array($args[0] => $args[1]); 
-			else 
-				$this->data = $args[0]; 
+			if (!empty($args)) {
+				if (!is_array($args[0]) && !isset($args[1])) 
+					return; 
+
+				if (!is_array($args[0])) 
+					$this->data = array($args[0] => $args[1]); 
+				else 
+					$this->data = $args[0]; 
+			} else { 
+				$this->data = ""; 
+			}
 			
 			$this->SetOpt(CURLOPT_URL, $this->url); 
 			$this->SetOpt(CURLOPT_RETURNTRANSFER, true);
@@ -78,7 +83,9 @@
 	                $this->SetOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
         	        $this->SetOpt(CURLOPT_SSL_VERIFYHOST, FALSE);
 
-			$this->SetOpt(CURLOPT_POSTFIELDS,http_build_query($this->data));
+			if (!empty($this->data)) {
+				$this->SetOpt(CURLOPT_POSTFIELDS,http_build_query($this->data));
+			}
 			//die(var_dump($this->GetOpts())); 
 			$this->reply = curl_exec($this->curl);
 			return $this->Get(); 
