@@ -2,10 +2,12 @@
 <html>
 <head>
 <?php
+	/*
 	require_once("mobile/Mobile_Detect.php"); 
 	$d = new Mobile_Detect(); 
 	if ($d->isMobile() || $d->isTablet()) 
 		header("Location: http://m.jkode.us/captcha"); 
+	*/ 
 ?>
 <title>JKurtz Captcha</title>
 <link rel="icon" type="image/jpg" href="images/icon.jpg">
@@ -15,8 +17,7 @@
 </head>
 <body>
 <div id="container">
-<div id="header">JKODE Captcha</div>
-<div id="copy">Developed by <a href="#" title="jason@jkurtz.net">Jason Kurtz</a></div>
+<?php include('header.php'); ?>
 <div class="inst">
 	<span>Type what you see. Without the spaces.</span>
 	<br>
