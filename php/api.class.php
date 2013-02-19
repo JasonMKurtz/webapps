@@ -80,8 +80,8 @@
 			$this->SetOpt(CURLOPT_URL, $this->url); 
 			$this->SetOpt(CURLOPT_RETURNTRANSFER, true);
 			$this->SetOpt(CURLOPT_CUSTOMREQUEST, $this->type);
-	                $this->SetOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-        	        $this->SetOpt(CURLOPT_SSL_VERIFYHOST, FALSE);
+	                $this->SetOpt(CURLOPT_SSL_VERIFYPEER, TRUE);
+        	        $this->SetOpt(CURLOPT_SSL_VERIFYHOST, TRUE);
 
 			if (!empty($this->data)) {
 				$this->SetOpt(CURLOPT_POSTFIELDS,http_build_query($this->data));
@@ -100,12 +100,10 @@
 		function Get() { 
 			if (!isset($this->reply) || $this->reply == "")
 				return "REPLY-1"; 
-				//return var_dump($this->reply); 
 			$decode = json_decode($this->reply);
-			return $decode; 
-			//if ($decode != NULL) 
-			//	return $decode;
-			//else {  
+			if ($decode != NULL) 
+				return $decode;
+			else {  
 				if (is_object($decode)) 
 					return ($this->datatype == 1 ? $decode : (array) $decode); 
 
@@ -117,12 +115,22 @@
 					$da[$data[0]] = $data[1]; 
 				}
 				return ($this->datatype == 1 ? (object) $da : $da); 
-			//} 
+			} 
 		}
 		
 		function GetRaw() { 
 			return $this->reply; 
 		}
 
+		function DrySend() { 
+			$ret = $this->url; 
+
+			$params = "?"; 
+			foreach ($this->data as $d => $v) { 
+				$params .= $d . "=" . $v . "&";
+			}
+			$ret .= $params; 
+			return $ret; 
+		}	
 	}		
 ?>
