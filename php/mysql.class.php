@@ -1,5 +1,5 @@
 <?php
-	//require_once("config.inc.php"); 
+	require_once("config.inc.php"); 
 
 	Class MySQL {
 			private $username = '', $password = '', $hostname = '', $database = ''; 
@@ -20,28 +20,32 @@
 					return $me; 
 				
 				global $config; 
-				$me = new MySQL($config['MYSQL_USER'], $config['MYSQL_PASSWORD'], $config['MYSQL_HOST'], $config['MYSQL_DB']); 
+				$me = new MySQL($config['MYSQL_USER'], $config['MYSQL_PASSWORD'], $config['MYSQL_HOST'], $config['MYSQL_DATABASE']); 
 				return $me; 
 			}
 
-			function __construct($user, $pass, $host, $db = '') {
-				//$this->Logger =& Logger::GetInstance(); // connection to our log handler
-				$this->username = $user; 
-				$this->password = $pass; 
-				$this->hostname = $host; 
+			function __construct($user = "", $pass = "", $host = "", $db = "") {
+				global $config; 
+				$this->username = ($user != "" ? $user : $config['MYSQL_USER']); 
+				$this->password = ($pass != "" ? $pass : $config['MYSQL_PASSWORD']); 
+				$this->hostname = ($host != "" ? $host : $config['MYSQL_HOST']); 
 				$this->status = 1; 
 
 				if (is_object($this->mysqli)) 
 					die("Trying to connect to an already connected socket...\n"); 
 			
-				$this->mysqli = new mysqli($host, $user, $pass); 
+				$this->mysqli = new mysqli($this->hostname, $this->username, $this->password); 
 				if ($this->mysqli->errno != 0) 
 					die("MYSQL connection error: " . $this->mysqli->connect_error); 
 
 				if ($db != "") {
 					$this->mysqli->select_db($db); 
-					$this->database = $db; 
+					$this->db = $db; 
+				} else { 
+					$this->mysqli->select_db($config['MYSQL_DATABASE']); 
+					$this->db = $config['MYSQL_DATABASE']; 
 				}
+
 				
 				return $this; 
 			}
@@ -125,6 +129,10 @@
 					case "query": 
 						return $this->query_count; 
 				}
+			}
+
+			function NumRows() { 
+				return $this->Count("rows"); 
 			}
 
 			function QueryCount() { 
