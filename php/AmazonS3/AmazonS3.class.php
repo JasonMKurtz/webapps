@@ -15,10 +15,13 @@
 			$this->bucket = $bucket; 
 		}
 
-		function doUpload($file, $name, $verbose = 0, $public = 'public-read') { 
+		function doUpload($file, $name = -1, $verbose = 0, $public = 'public-read') { 
 			if (!is_file($file)) { 
 				die(sprintf("File %s does not exist.\n", $file)); 
 			}
+
+			if ($name == -1) 
+				$name = $file; 
 
 			try {
 				$this->client->upload($this->bucket, $name, fopen($file, 'r'), $public); 
@@ -32,4 +35,7 @@
 			}
 		}
 	}
+
+	$S3 = new AmazonS3("b1.aws"); 
+	echo $S3->doUpload("terminals.png"); 
 ?> 
