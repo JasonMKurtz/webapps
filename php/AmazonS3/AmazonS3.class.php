@@ -32,7 +32,4 @@
 			}
 		}
 	}
-
-	$S3 = new AmazonS3("b1.aws"); 
-	echo $S3->doUpload("terminals.png", "terminals.png"); 
 ?> 
